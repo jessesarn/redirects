@@ -1,0 +1,480 @@
+---
+kind: "Template"
+apiVersion: "v1"
+metadata:
+  name: "website-redirects"
+  annotations:
+    openshift.io/display-name: "Decommissioned Website Redirects"
+    description: "Provides website redirects for old, decommissioned OpenShift websites"
+    iconClass: "icon-shadowman"
+    template.openshift.io/provider-display-name: "Red Hat, Inc."
+message: "The following service(s) have been created in your project: ${NAME}."
+labels:
+  template: "website-redirects"
+objects:
+  - kind: "Service"
+    apiVersion: "v1"
+    metadata:
+      name: "${NAME}"
+      annotations:
+        description: "Exposes and load balances the frontend application pods"
+      labels:
+        app: "${NAME}"
+    spec:
+      ports:
+        - name: "8080-tcp"
+          port: 8080
+          protocol: "TCP"
+          targetPort: 8080
+      selector:
+        name: "${NAME}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "developers-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "developers.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${DEVELOPERS_CERTIFICATE}"
+        key: "${DEVELOPERS_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "forums-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "forums.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${FORUMS_CERTIFICATE}"
+        key: "${FORUMS_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "enterprise-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "enterprise.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${ENTERPRISE_CERTIFICATE}"
+        key: "${ENTERPRISE_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "install-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "install.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${INSTALL_CERTIFICATE}"
+        key: "${INSTALL_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "origin-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "origin.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${ORIGIN_CERTIFICATE}"
+        key: "${ORIGIN_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "hub-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "hub.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${HUB_CERTIFICATE}"
+        key: "${HUB_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "marketplace-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "marketplace.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${MARKETPLACE_CERTIFICATE}"
+        key: "${MARKETPLACE_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "ideas-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "ideas.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${IDEAS_CERTIFICATE}"
+        key: "${IDEAS_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "openshift-redhat-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "openshift.redhat.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${REDHAT_CERTIFICATE}"
+        key: "${REDHAT_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      name: "www-rhcloud-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "www.rhcloud.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${RHCLOUD_CERTIFICATE}"
+        key: "${RHCLOUD_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "ImageStream"
+    apiVersion: "v1"
+    metadata:
+      name: "${NAME}"
+      annotations:
+        description: "Keeps track of changes in the ${NAME} application image"
+      labels:
+        app: "${NAME}"
+
+  - kind: "ImageStream"
+    apiVersion: "v1"
+    metadata:
+      name: "httpd-24-rhel7"
+      annotations:
+        description: "Upstream httpd 2.4 s2i image"
+      labels:
+        app: "${NAME}"
+    spec:
+      lookupPolicy:
+        local: false
+      tags:
+      - annotations: null
+        from:
+          kind: "DockerImage"
+          name: "registry.access.redhat.com/rhscl/httpd-24-rhel7"
+        generation: 0
+        importPolicy:
+          scheduled: true
+        name: "latest"
+        referencePolicy:
+          type: "Source"
+
+  - kind: "BuildConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${NAME}"
+      annotations:
+        description: "Defines how to perform the build for ${NAME} before deployment"
+      labels:
+        app: "${NAME}"
+    spec:
+      nodeSelector:
+      source:
+        type: "Git"
+        git:
+          uri: "${SOURCE_REPOSITORY_URL}"
+          ref: "${SOURCE_REPOSITORY_REF}"
+        contextDir: "${CONTEXT_DIR}"
+        sourceSecret:
+          name: "${SOURCE_CLONE_SECRET}"
+      strategy:
+        type: "Source"
+        sourceStrategy:
+          from:
+            kind: "ImageStreamTag"
+            name: "httpd-24-rhel7:latest"
+      output:
+        to:
+          kind: "ImageStreamTag"
+          name: "${NAME}:latest"
+      triggers:
+        - type: "ImageChange"
+        - type: "ConfigChange"
+        - type: "GitHub"
+          github:
+            secret: "${GITHUB_WEBHOOK_SECRET}"
+
+  - kind: "DeploymentConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${NAME}"
+      annotations:
+        description: "Defines how to deploy the httpd deployment"
+      labels:
+        app: "${NAME}"
+    spec:
+      strategy:
+        activeDeadlineSeconds: 21600
+        resources: {}
+        rollingParams:
+          intervalSeconds: 1
+          maxSurge: 25%
+          maxUnavailable: 25%
+          timeoutSeconds: 600
+          updatePeriodSeconds: 1
+        type: "Rolling"
+      triggers:
+        - type: "ImageChange"
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - "${NAME}"
+            from:
+              kind: "ImageStreamTag"
+              name: "${NAME}:latest"
+        - type: "ConfigChange"
+      replicas: 1
+      test: false
+      selector:
+        name: "${NAME}"
+      template:
+        metadata:
+          name: "${NAME}"
+          labels:
+            name: "${NAME}"
+            app: "${NAME}"
+        spec:
+          containers:
+            - name: "${NAME}"
+              ports:
+                - containerPort: 8080
+              resources:
+                requests:
+                  cpu: "${CPU_REQUEST}"
+                  memory: "${MEMORY_REQUEST}"
+                limits:
+                  cpu: "${CPU_LIMIT}"
+                  memory: "${MEMORY_LIMIT}"
+
+parameters:
+  - name: "NAME"
+    displayName: "Application name"
+    description: "The name assigned to all of the application components defined in this template."
+    required: true
+    value: "redirects"
+
+  - name: "SOURCE_REPOSITORY_URL"
+    displayName: "Git Repository URL"
+    description: "The URL of the repository with your application source code."
+    required: true
+    value: "git@github.com:openshift-cs/redirects.git"
+
+  - name: "SOURCE_REPOSITORY_REF"
+    displayName: "Git Reference"
+    description: "Set this to a branch name, tag or other ref of your repository if you are not using the default branch."
+
+  - name: "CONTEXT_DIR"
+    displayName: "Context Directory"
+    description: "Set this to the relative path to your project if it is not in the root of your repository."
+
+  - name: "SOURCE_CLONE_SECRET"
+    displayName: "Source Clone Secret Name"
+    description: "The name of your source clone secret, used to provide the builder with access to your private GitHub repo."
+    required: true
+    value: "github-redirects"
+
+  - name: "CPU_REQUEST"
+    displayName: "CPU Request"
+    description: "Requested amount of CPU the httpd container will use."
+    required: true
+    value: "200m"
+
+  - name: "CPU_LIMIT"
+    displayName: "CPU Limit"
+    description: "Maximum amount of CPU the httpd container can use."
+    required: true
+    value: "2"
+
+  - name: "MEMORY_REQUEST"
+    displayName: "Memory Request"
+    description: "Requested amount of memory the httpd container will use."
+    required: true
+    value: "1Gi"
+
+  - name: "MEMORY_LIMIT"
+    displayName: "Memory Limit"
+    description: "Maximum amount of memory the httpd container can use."
+    required: true
+    value: "2Gi"
+
+  - name: "GITHUB_WEBHOOK_SECRET"
+    displayName: "GitHub Webhook Secret"
+    description: "A secret string used to configure the GitHub webhook."
+    generate: "expression"
+    from: "[a-zA-Z0-9]{40}"
+
+  - name: "CA_CERTIFICATE"
+    displayName: "CA Certificate"
+    description: "SSL provider intermediate public certificate"
+
+  - name: "DEVELOPERS_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "DEVELOPERS_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "FORUMS_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "FORUMS_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "ENTERPRISE_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "ENTERPRISE_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "INSTALL_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "INSTALL_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "ORIGIN_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "ORIGIN_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "HUB_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "HUB_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "MARKETPLACE_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "MARKETPLACE_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "IDEAS_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "IDEAS_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "REDHAT_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "REDHAT_KEY"
+    displayName: "SSL Private Key"
+
+  - name: "RHCLOUD_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "RHCLOUD_KEY"
+    displayName: "SSL Private Key"
