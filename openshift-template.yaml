@@ -32,6 +32,27 @@ objects:
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      name: "openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+      tls:
+        termination: "edge"
+        insecureEdgeTerminationPolicy: "Allow"
+        certificate: "${OPENSHIFT_CERTIFICATE}"
+        key: "${OPENSHIFT_KEY}"
+        caCertificate: "${CA_CERTIFICATE}"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
       name: "developers-openshift-com"
       labels:
         app: "${NAME}"
@@ -418,6 +439,12 @@ parameters:
   - name: "CA_CERTIFICATE"
     displayName: "CA Certificate"
     description: "SSL provider intermediate public certificate"
+
+  - name: "OPENSHIFT_CERTIFICATE"
+    displayName: "SSL Public Certificate"
+
+  - name: "OPENSHIFT_KEY"
+    displayName: "SSL Private Key"
 
   - name: "DEVELOPERS_CERTIFICATE"
     displayName: "SSL Public Certificate"
