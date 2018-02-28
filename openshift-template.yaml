@@ -379,6 +379,23 @@ objects:
                   cpu: "${CPU_LIMIT}"
                   memory: "${MEMORY_LIMIT}"
 
+  - kind: "HorizontalPodAutoscaler"
+    apiVersion: "extensions/v1beta1"
+    metadata:
+      name: "${NAME}"
+      labels:
+        app: "${NAME}"
+    spec:
+      scaleRef:
+        kind: DeploymentConfig
+        name: "${NAME}"
+        apiVersion: "v1"
+        subresource: "scale"
+      minReplicas: ${MIN_REPLICAS}
+      maxReplicas: ${MAX_REPLICAS}
+      cpuUtilization:
+        targetPercentage: ${TARGET_PERCENTAGE}
+
 parameters:
   - name: "NAME"
     displayName: "Application name"
@@ -435,6 +452,24 @@ parameters:
     description: "A secret string used to configure the GitHub webhook."
     generate: "expression"
     from: "[a-zA-Z0-9]{40}"
+
+  - name: "MIN_REPLICAS"
+    displayName: "Minimum pod replicas"
+    description: "The minimum number of replicas to run in autoscaling."
+    required: true
+    value: "2"
+
+  - name: "MAX_REPLICAS"
+    displayName: "Maximum pod replicas"
+    description: "The maximum number of replicas to run in autoscaling."
+    required: true
+    value: "10"
+
+  - name: "TARGET_PERCENTAGE"
+    displayName: "Autoscaling target CPU percentage (as an integer)."
+    description: "The percentage of the requested CPU that each pod should ideally be using."
+    required: true
+    value: "80"
 
   - name: "CA_CERTIFICATE"
     displayName: "CA Certificate"
