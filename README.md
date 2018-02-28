@@ -3,6 +3,7 @@
 Maintains the redirects for various decommissioned web properties or naked domains
 
   - openshift.com
+  - openshift.org
   - developers.openshift.com
   - forums.openshift.com
   - enterprise.openshift.com
@@ -28,6 +29,7 @@ Testing can be done from `curl` without requiring an update to DNS for new sites
 ```bash
 oc process -f openshift-template.yaml -p CA_CERTIFICATE="$(cat certs/DigiCertCA.crt)" \
     -p OPENSHIFT_CERTIFICATE="$(cat certs/openshift_com.crt)" -p OPENSHIFT_KEY="$(cat certs/openshift_com.key)" \
+    -p OPENSHIFT_ORG_CERTIFICATE="$(cat certs/www_openshift_org.crt)" -p OPENSHIFT_KEY="$(cat certs/www_openshift_org.key)" \
     -p DEVELOPERS_CERTIFICATE="$(cat certs/developers_openshift_com.crt)" -p DEVELOPERS_KEY="$(cat certs/developers_openshift_com.key)" \
     -p FORUMS_CERTIFICATE="$(cat certs/forums_openshift_com.crt)" -p FORUMS_KEY="$(cat certs/forums_openshift_com.key)" \
     -p ENTERPRISE_CERTIFICATE="$(cat certs/enterprise_openshift_com.crt)" -p ENTERPRISE_KEY="$(cat certs/enterprise_openshift_com.key)" \
