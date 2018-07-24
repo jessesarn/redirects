@@ -14,6 +14,7 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - ideas.openshift.com
   - openshift.redhat.com
   - www.rhcloud.com
+  - www.okd.io
 
 Adding a new Host name requires creating a matching route.
 
@@ -40,5 +41,6 @@ oc process -f openshift-template.yaml -p CA_CERTIFICATE="$(cat certs/DigiCertCA.
     -p IDEAS_CERTIFICATE="$(cat certs/ideas_openshift_com.crt)" -p IDEAS_KEY="$(cat certs/ideas_openshift_com.key)" \
     -p REDHAT_CERTIFICATE="$(cat certs/openshift_redhat_com.crt)" -p REDHAT_KEY="$(cat certs/openshift_redhat_com.key)" \
     -p RHCLOUD_CERTIFICATE="$(cat certs/www_rhcloud_com.crt)" -p RHCLOUD_KEY="$(cat certs/www_rhcloud_com.key)" \
+    -p OKD_CERTIFICATE="$(cat certs/www_okd_io.crt)" -p OKD_KEY="$(cat certs/www_okd_io.key)" \
   | oc create -f -
 ```
