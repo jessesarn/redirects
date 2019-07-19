@@ -15,6 +15,8 @@ objects:
   - kind: "Service"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "${NAME}"
       annotations:
         description: "Exposes and load balances the frontend application pods"
@@ -32,6 +34,8 @@ objects:
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "openshift-com"
       labels:
         app: "${NAME}"
@@ -43,16 +47,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${OPENSHIFT_CERTIFICATE}"
-        key: "${OPENSHIFT_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "openshift-org"
       labels:
         app: "${NAME}"
@@ -64,16 +64,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${OPENSHIFT_ORG_CERTIFICATE}"
-        key: "${OPENSHIFT_ORG_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "developers-openshift-com"
       labels:
         app: "${NAME}"
@@ -85,16 +81,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${DEVELOPERS_CERTIFICATE}"
-        key: "${DEVELOPERS_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "forums-openshift-com"
       labels:
         app: "${NAME}"
@@ -106,16 +98,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${FORUMS_CERTIFICATE}"
-        key: "${FORUMS_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "enterprise-openshift-com"
       labels:
         app: "${NAME}"
@@ -127,16 +115,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${ENTERPRISE_CERTIFICATE}"
-        key: "${ENTERPRISE_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "install-openshift-com"
       labels:
         app: "${NAME}"
@@ -148,16 +132,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${INSTALL_CERTIFICATE}"
-        key: "${INSTALL_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "origin-openshift-com"
       labels:
         app: "${NAME}"
@@ -169,16 +149,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${ORIGIN_CERTIFICATE}"
-        key: "${ORIGIN_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "hub-openshift-com"
       labels:
         app: "${NAME}"
@@ -190,16 +166,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${HUB_CERTIFICATE}"
-        key: "${HUB_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "marketplace-openshift-com"
       labels:
         app: "${NAME}"
@@ -211,16 +183,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${MARKETPLACE_CERTIFICATE}"
-        key: "${MARKETPLACE_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "ideas-openshift-com"
       labels:
         app: "${NAME}"
@@ -232,16 +200,13 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${IDEAS_CERTIFICATE}"
-        key: "${IDEAS_KEY}"
         caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "openshift-redhat-com"
       labels:
         app: "${NAME}"
@@ -253,16 +218,12 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${REDHAT_CERTIFICATE}"
-        key: "${REDHAT_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "Route"
     apiVersion: "v1"
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "www-rhcloud-com"
       labels:
         app: "${NAME}"
@@ -274,12 +235,6 @@ objects:
         weight: 1
       port:
         targetPort: "8080-tcp"
-      tls:
-        termination: "edge"
-        insecureEdgeTerminationPolicy: "Allow"
-        certificate: "${RHCLOUD_CERTIFICATE}"
-        key: "${RHCLOUD_KEY}"
-        caCertificate: "${CA_CERTIFICATE}"
 
   - kind: "ImageStream"
     apiVersion: "v1"
@@ -401,21 +356,19 @@ objects:
                   memory: "${MEMORY_LIMIT}"
 
   - kind: "HorizontalPodAutoscaler"
-    apiVersion: "extensions/v1beta1"
+    apiVersion: "autoscaling/v1"
     metadata:
       name: "${NAME}"
       labels:
         app: "${NAME}"
     spec:
-      scaleRef:
+      scaleTargetRef:
         kind: DeploymentConfig
         name: "${NAME}"
         apiVersion: "v1"
-        subresource: "scale"
-      minReplicas: ${MIN_REPLICAS}
-      maxReplicas: ${MAX_REPLICAS}
-      cpuUtilization:
-        targetPercentage: ${TARGET_PERCENTAGE}
+      minReplicas: 2
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 75
 
 parameters:
   - name: "NAME"
@@ -448,122 +401,28 @@ parameters:
     displayName: "CPU Request"
     description: "Requested amount of CPU the httpd container will use."
     required: true
-    value: "200m"
+    value: "50m"
 
   - name: "CPU_LIMIT"
     displayName: "CPU Limit"
     description: "Maximum amount of CPU the httpd container can use."
     required: true
-    value: "2"
+    value: "500m"
 
   - name: "MEMORY_REQUEST"
     displayName: "Memory Request"
     description: "Requested amount of memory the httpd container will use."
     required: true
-    value: "1Gi"
+    value: "100Mi"
 
   - name: "MEMORY_LIMIT"
     displayName: "Memory Limit"
     description: "Maximum amount of memory the httpd container can use."
     required: true
-    value: "2Gi"
+    value: "512Mi"
 
   - name: "GITHUB_WEBHOOK_SECRET"
     displayName: "GitHub Webhook Secret"
     description: "A secret string used to configure the GitHub webhook."
     generate: "expression"
     from: "[a-zA-Z0-9]{40}"
-
-  - name: "MIN_REPLICAS"
-    displayName: "Minimum pod replicas"
-    description: "The minimum number of replicas to run in autoscaling."
-    required: true
-    value: "2"
-
-  - name: "MAX_REPLICAS"
-    displayName: "Maximum pod replicas"
-    description: "The maximum number of replicas to run in autoscaling."
-    required: true
-    value: "10"
-
-  - name: "TARGET_PERCENTAGE"
-    displayName: "Autoscaling target CPU percentage (as an integer)."
-    description: "The percentage of the requested CPU that each pod should ideally be using."
-    required: true
-    value: "80"
-
-  - name: "CA_CERTIFICATE"
-    displayName: "CA Certificate"
-    description: "SSL provider intermediate public certificate"
-
-  - name: "OPENSHIFT_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "OPENSHIFT_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "OPENSHIFT_ORG_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "OPENSHIFT_ORG_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "DEVELOPERS_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "DEVELOPERS_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "FORUMS_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "FORUMS_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "ENTERPRISE_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "ENTERPRISE_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "INSTALL_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "INSTALL_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "ORIGIN_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "ORIGIN_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "HUB_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "HUB_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "MARKETPLACE_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "MARKETPLACE_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "IDEAS_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "IDEAS_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "REDHAT_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "REDHAT_KEY"
-    displayName: "SSL Private Key"
-
-  - name: "RHCLOUD_CERTIFICATE"
-    displayName: "SSL Public Certificate"
-
-  - name: "RHCLOUD_KEY"
-    displayName: "SSL Private Key"
