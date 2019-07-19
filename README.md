@@ -14,7 +14,9 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - ideas.openshift.com
   - openshift.redhat.com
   - www.rhcloud.com
-  - www.okd.io
+  - okd.io
+  - www.openshift.org
+  - docs.openshift.org
 
 Adding a new Host name requires creating a matching route.
 

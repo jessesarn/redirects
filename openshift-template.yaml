@@ -236,6 +236,57 @@ objects:
       port:
         targetPort: "8080-tcp"
 
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
+      name: "www-openshift-org"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "www.openshift.org"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
+      name: "docs-openshift-org"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "docs.openshift.org"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
+      name: "okd-io"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "okd.io"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+
   - kind: "ImageStream"
     apiVersion: "v1"
     metadata:
