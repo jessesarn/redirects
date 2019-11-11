@@ -17,6 +17,7 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - okd.io
   - www.openshift.org
   - docs.openshift.org
+  - projectquay.io
 
 Adding a new Host name requires creating a matching route.
 
@@ -24,7 +25,7 @@ Adding a new Host name requires creating a matching route.
 
 Testing can be done from `curl` without requiring an update to DNS for new sites
 
-    curl http://elb.e203.evg.openshiftapps.com/ -sSL -D - -H 'Host: install.openshift.com' -o /dev/null
+    curl http://elb.apps.openshift-web.p0s5.p1.openshiftapps.com/ -sSL -D - -H 'Host: install.openshift.com' -o /dev/null
 
 
 # Initial Deployment
