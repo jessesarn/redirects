@@ -19,6 +19,7 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - docs.openshift.org
   - projectquay.io
   - osdworkshop.io
+  - try.openshift.com
 
 Adding a new Host name requires creating a matching route.
 
