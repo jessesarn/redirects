@@ -355,6 +355,23 @@ objects:
       port:
         targetPort: "8080-tcp"
 
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
+      name: "blog-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "account.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+
   - kind: "ImageStream"
     apiVersion: "v1"
     metadata:
