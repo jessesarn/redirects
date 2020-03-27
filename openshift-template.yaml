@@ -360,7 +360,7 @@ objects:
     metadata:
       annotations:
         kubernetes.io/tls-acme: "true"
-      name: "blog-openshift-com"
+      name: "account-openshift-com"
       labels:
         app: "${NAME}"
     spec:
