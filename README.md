@@ -5,6 +5,7 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - openshift.com
   - openshift.org
   - developers.openshift.com
+  - developer.openshift.com
   - forums.openshift.com
   - enterprise.openshift.com
   - install.openshift.com

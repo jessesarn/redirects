@@ -87,6 +87,23 @@ objects:
     metadata:
       annotations:
         kubernetes.io/tls-acme: "true"
+      name: "developer-openshift-com"
+      labels:
+        app: "${NAME}"
+    spec:
+      host: "developer.openshift.com"
+      to:
+        kind: "Service"
+        name: "${NAME}"
+        weight: 1
+      port:
+        targetPort: "8080-tcp"
+
+  - kind: "Route"
+    apiVersion: "v1"
+    metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       name: "forums-openshift-com"
       labels:
         app: "${NAME}"
