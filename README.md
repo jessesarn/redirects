@@ -23,6 +23,7 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - try.openshift.com
   - blog.openshift.com
   - account.openshift.com
+  - cookbook.openshift.com
 
 Adding a new Host name requires creating a matching route.
 
