@@ -24,6 +24,7 @@ Maintains the redirects for various decommissioned web properties or naked domai
   - blog.openshift.com
   - account.openshift.com
   - cookbook.openshift.com
+  - summit.openshift.com (temporary)
 
 Adding a new Host name requires creating a matching route.
 
